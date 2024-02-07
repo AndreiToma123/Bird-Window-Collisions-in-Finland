@@ -1,0 +1,53 @@
+@import url('https://fonts.cdnfonts.com/css/kavoon');
+@import url('https://fonts.cdnfonts.com/css/katibeh');
+@import url('https://fonts.cdnfonts.com/css/inria-serif');
+@import url('https://fonts.cdnfonts.com/css/karma');
+
+* {
+    padding: 0;
+    margin:  0;
+}
+
+body {
+    background-color: #08457D;
+    font-weight: bold;
+    color: white;
+}
+
+menu {
+    font-family: 'inria serif', sans-serif;
+    font-size: 50px;
+}
+
+/* Header such as the name of the website */
+header {
+    font-family: 'Katibeh', sans-serif;
+    font-size: 70px;
+    font-weight: normal;
+}
+
+menuitem {
+    font-family: 'Inria Serif', sans-serif;
+    font-size: 24px;
+}
+
+/* Buttons such as About Us */
+nav {
+    font-family: 'Karma', sans-serif;
+    font-size: 24px;
+}
+
+h1 {
+    font-family: 'Kavoon', sans-serif;
+    font-size: 60px;
+}
+
+h2 {
+    font-family:'Kavoon', sans-serif;
+    font-size: 30px;
+}
+
+h3 {
+    font-family: 'Karma', sans-serif;
+    font-size: 24px;
+}
