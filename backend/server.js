@@ -50,6 +50,29 @@ app.post('/upload', upload.array('images', 3), async (req, res) => {
   }
 });
 
+app.get('/api/data/unconfirmed', async (req, res) => {
+    try {
+      const unconfirmedData = await DataModel.find({ confirmed: false });
+      res.json(unconfirmedData);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
+  app.post('/api/data/confirm', async (req, res) => {
+    const { id, imagesToKeep } = req.body; // 假设发送了数据项的ID和要保留的图片数组
+  
+    try {
+      const updatedData = await DataModel.findByIdAndUpdate(id, {
+        confirmed: true,
+        images: imagesToKeep,
+      }, { new: true });
+  
+      res.json(updatedData);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
+  
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
