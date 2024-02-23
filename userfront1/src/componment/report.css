@@ -1,0 +1,63 @@
+/* 设置背景色为RGB(5,81,135) */
+@import "~leaflet/dist/leaflet.css";
+
+body, html {
+    
+    margin: 0; /* 移除默认的外边距 */
+    padding: 0; /* 移除默认的内边距 */
+    display: flex; /* 启用flex布局 */
+    justify-content: center; /* 水平居中对齐子元素 */
+    min-height: 100vh; /* 设置最小高度为视口高度，确保占满整个屏幕 */
+}
+
+/* 整个表单容器的样式 */
+.form-container {
+    margin: 0 auto; /* 左右外边距设置为自动，实现水平居中 */
+    width: 80%; /* 设置表单的宽度。您可以根据需要调整这个值 */
+    max-width: 1200px; /* 您可以根据设计需求设置一个最大宽度 */
+    box-sizing: border-box; /* 防止padding影响总体宽度 */
+}
+
+/* 其他样式保持不变 */
+
+/* 媒体查询，用于处理屏幕宽度大于500px的设备 */
+@media (min-width: 501px) {
+    .image-upload {
+        display: inline-block; /* 让图片上传部分在同一行显示 */
+        width: calc(33.333% - 2%); /* 计算每个上传部分的宽度，减去总间距 */
+        margin-right: 10px; /* 在图片上传部分之间添加间隔，根据需求调整 */
+    }
+    .image-upload:last-child {
+        margin-right: 0; /* 最后一个图片上传部分不需要间隔 */
+    }
+}
+
+/* 媒体查询，用于处理屏幕宽度小于等于500px的设备 */
+@media (max-width: 500px) {
+    .image-upload {
+        display: block; /* 让图片上传部分堆叠起来 */
+        width: 100%; /* 让每个部分占据整个容器宽度 */
+        margin-right: 0; /* 移除间隔 */
+    }
+}
+
+/* 缩略图样式 */
+.image-preview {
+    width: 100%; /* 使缩略图占据整个上传部分的宽度 */
+    height: auto; /* 设置高度自动，保持图片比例 */
+    aspect-ratio: 1 / 1; /* 使宽度和高度相等，得到一个正方形 */
+    object-fit: contain; /* 确保整个图片都可见，根据容器的大小调整自身的大小 */
+    background-color: white; /* 设置背景颜色以填充空白区域 */
+}
+
+.description-textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    resize: vertical;
+  }
+
+  
