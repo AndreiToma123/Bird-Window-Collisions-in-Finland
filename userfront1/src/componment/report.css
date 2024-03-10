@@ -1,63 +1,199 @@
-/* 设置背景色为RGB(5,81,135) */
 @import "~leaflet/dist/leaflet.css";
 
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 body, html {
-    
-    margin: 0; /* 移除默认的外边距 */
-    padding: 0; /* 移除默认的内边距 */
-    display: flex; /* 启用flex布局 */
-    justify-content: center; /* 水平居中对齐子元素 */
-    min-height: 100vh; /* 设置最小高度为视口高度，确保占满整个屏幕 */
+    margin: 0;
+    padding: 0;
+    background-color: #08457D; 
+    color: #ffffff;
+    font-family: 'Arial', sans-serif; 
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
 }
 
-/* 整个表单容器的样式 */
 .form-container {
-    margin: 0 auto; /* 左右外边距设置为自动，实现水平居中 */
-    width: 80%; /* 设置表单的宽度。您可以根据需要调整这个值 */
-    max-width: 1200px; /* 您可以根据设计需求设置一个最大宽度 */
-    box-sizing: border-box; /* 防止padding影响总体宽度 */
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 2rem auto;
+    max-width: calc(100vw - 8rem);
+    height: calc(100vh - 10rem);
+    padding: 0 2rem;
+    gap: 2rem;
+    margin-top: 1.5rem; 
+    min-height: calc(100vh - 10rem);
 }
 
-/* 其他样式保持不变 */
-
-/* 媒体查询，用于处理屏幕宽度大于500px的设备 */
-@media (min-width: 501px) {
-    .image-upload {
-        display: inline-block; /* 让图片上传部分在同一行显示 */
-        width: calc(33.333% - 2%); /* 计算每个上传部分的宽度，减去总间距 */
-        margin-right: 10px; /* 在图片上传部分之间添加间隔，根据需求调整 */
-    }
-    .image-upload:last-child {
-        margin-right: 0; /* 最后一个图片上传部分不需要间隔 */
-    }
+.submit-button-container {
+    position: absolute; 
+    right: 8rem;
+    bottom: 1.5rem;
+    margin-bottom: -1.8rem;
 }
 
-/* 媒体查询，用于处理屏幕宽度小于等于500px的设备 */
-@media (max-width: 500px) {
-    .image-upload {
-        display: block; /* 让图片上传部分堆叠起来 */
-        width: 100%; /* 让每个部分占据整个容器宽度 */
-        margin-right: 0; /* 移除间隔 */
-    }
+.submit-button-container button {
+    padding: 0.5rem 1rem; 
+    font-size: 1.2rem; 
+    width: 150px; 
+    height: 50px; 
+  }
+  
+
+.left-container {
+    display: flex;
+    flex-direction: column; 
+    width: 50%; 
+    max-width: 50%; 
+    padding: 20px;
 }
 
-/* 缩略图样式 */
+
+.map-container {
+    position: relative;
+    width: 50%;
+    max-width: 50%; 
+    height: 350px; 
+    min-height: 350px; 
+}
+
+button {
+    background-color: #ffffff; 
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    margin-bottom: -30rem;
+}
+
+.image-upload-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end; 
+    padding: 1rem;
+    margin-top: -2.5rem; 
+}
+  
+.image-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem;
+    position: relative;
+    width: 90px; 
+    height: 90px; 
+    border: 2px dashed #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+  
+.image-upload-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+  
 .image-preview {
-    width: 100%; /* 使缩略图占据整个上传部分的宽度 */
-    height: auto; /* 设置高度自动，保持图片比例 */
-    aspect-ratio: 1 / 1; /* 使宽度和高度相等，得到一个正方形 */
-    object-fit: contain; /* 确保整个图片都可见，根据容器的大小调整自身的大小 */
-    background-color: white; /* 设置背景颜色以填充空白区域 */
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+.image-upload-plus {
+    font-size: 24px;
+    color: #ffffff;
+}
+  
+.image-upload-input {
+    display: none;
+}
+  
+.image-upload-text {
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.description-container {
+    margin-top: -1.8rem;
 }
 
 .description-textarea {
-    width: 100%;
-    height: 150px;
+    width: 100%; 
+    max-width: 100%; 
+    height: 100px; 
     padding: 10px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    resize: vertical;
-  }
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: -0.5rem;
+}
 
+.save-location-button {
+    margin-top: 0rem; 
+}
   
+button:hover {
+    background-color: #ffffff; 
+}
+
+h4 + p {
+    margin-top: -1rem;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+        align-items: center;
+        min-height: auto;
+    }
+
+    .left-container,
+    .map-container {
+        width: 100%;
+        max-width: none;
+        padding: 0 1rem; 
+    }
+
+    .left-container {
+        order: 1;
+        padding-bottom: 1rem; 
+    }
+
+    .map-container {
+        height: 250px;
+        order: 2;
+    }
+
+    .submit-button-container {
+        position: static;
+        width: 100%;
+        text-align: center;
+        order: 3;
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+
+    .submit-button-container button {
+        width: auto; 
+        margin: 0 auto;
+    }
+
+    .description-textarea {
+        height: 80px; 
+    }
+}
