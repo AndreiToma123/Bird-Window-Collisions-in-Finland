@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, useMapEvents, useMap, Marker} from 'react-leaf
 import L from 'leaflet';
 import customIconUrl from '../Picture/Map_Location_Symbol.png';
 import 'leaflet/dist/leaflet.css';
+import { useNavigate } from 'react-router-dom';
 import './report.css'; 
 
 function UploadForm() {
@@ -10,6 +11,7 @@ function UploadForm() {
   const [bodyImage, setBodyImage] = useState(null);
   const [tailImage, setTailImage] = useState(null);
   const [description, setDescription] = useState(''); 
+  const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [location, setLocation] = useState({
     loaded: false,
@@ -89,6 +91,7 @@ function UploadForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    navigate('/submitted');
   };
 
   const handleDescriptionChange = (event) => {
