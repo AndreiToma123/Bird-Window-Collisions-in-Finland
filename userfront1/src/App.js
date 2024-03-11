@@ -4,6 +4,7 @@ import UploadForm from './UploadForm';
 import About from './About';
 import Contact from './Contact';
 import Report from './componment/report';
+import Submitted from './Submitted';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/report" element={<UploadForm />} />
+          <Route path="/submitted" element={<Submitted />} />
           <Route path="/" element={<Report />} />
         </Routes>
 
