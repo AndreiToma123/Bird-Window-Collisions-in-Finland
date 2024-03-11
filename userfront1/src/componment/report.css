@@ -39,9 +39,9 @@ body, html {
 
 .submit-button-container button {
     padding: 0.5rem 1rem; 
-    font-size: 1.2rem; 
-    width: 150px; 
-    height: 50px; 
+    font-size: 1.1rem; 
+    width: 130px; 
+    height: 40px; 
   }
   
 
@@ -84,23 +84,28 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0.5rem;
+    justify-content: center;
     position: relative;
-    width: 90px; 
-    height: 90px; 
     border: 2px dashed #ffffff;
     border-radius: 10px;
-    overflow: hidden;
-}
+    padding: 1rem;
+    width: 90px;
+    height: 90px;
+    background-color: transparent;
+    margin-bottom: 20px;
+  }
+
   
 .image-upload-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
 }
   
 .image-preview {
@@ -124,10 +129,13 @@ button {
 }
   
 .image-upload-text {
-    text-align: center;
-    color: #ffffff;
-    cursor: pointer;
-}
+    position: absolute;
+    bottom: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+  }
+
 
 .description-container {
     margin-top: -1.8rem;
@@ -140,7 +148,7 @@ button {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    margin-top: -0.5rem;
+    margin-top: -0.8rem;
 }
 
 .save-location-button {

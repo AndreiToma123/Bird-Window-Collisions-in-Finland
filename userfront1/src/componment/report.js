@@ -107,32 +107,33 @@ function UploadForm() {
       <div className="left-container">
       <form onSubmit={handleSubmit}>
         <div className="image-upload-container">
-          {['head', 'body', 'tail'].map((part) => (
-            <div className="image-upload" key={part}>
-              <input
-                id={`image-upload-${part}`}
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleImageChange(part, e)}
-                className="image-upload-input"
-              />
-              <label htmlFor={`image-upload-${part}`} className="image-upload-label">
-                  <div className="image-upload-plus">+</div>
-                </label>
-                {part === 'head' && headImage && (
-                  <img src={headImage} alt="Head Preview" className="image-preview" />
-                )}
-                {part === 'body' && bodyImage && (
-                  <img src={bodyImage} alt="Body Preview" className="image-preview" />
-                )}
-                {part === 'tail' && tailImage && (
-                  <img src={tailImage} alt="Tail Preview" className="image-preview" />
-                )}
-                <label htmlFor={`image-upload-${part}`} className="image-upload-text">
-                  {part.charAt(0).toUpperCase() + part.slice(1)}
-                </label>
-            </div>
-          ))}
+        {['head', 'body', 'tail'].map((part) => (
+          <div className="image-upload" key={part}>
+            <input
+              id={`image-upload-${part}`}
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageChange(part, e)}
+              className="image-upload-input"
+            />
+            <label htmlFor={`image-upload-${part}`} className="image-upload-label">
+              <div className="image-upload-plus">+</div>
+            </label>
+            {part === 'head' && headImage && (
+              <img src={headImage} alt="Head Preview" className="image-preview" />
+            )}
+            {part === 'body' && bodyImage && (
+              <img src={bodyImage} alt="Body Preview" className="image-preview" />
+            )}
+            {part === 'tail' && tailImage && (
+              <img src={tailImage} alt="Tail Preview" className="image-preview" />
+            )}
+            <span className="image-upload-text">
+              {part.charAt(0).toUpperCase() + part.slice(1)}
+            </span>
+          </div>
+        ))}
+
         </div>
   
         <div className="description-container">
