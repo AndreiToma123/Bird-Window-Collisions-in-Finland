@@ -1,0 +1,44 @@
+.submitted-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .checkmark-container {
+    width: 150px; 
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .checkmark-container img {
+    width: 100%;
+    height: auto;
+  }
+  
+  h2 {
+    color: #ffffff; 
+    margin: 10px 0; 
+  }
+  
+  button {
+    background-color: #0044cc; 
+    color: #ffffff; 
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #003399; 
+  }
+  
+  button:nth-child(2) {
+    background-color: #BBBBBB; 
+  }
+  
+  
