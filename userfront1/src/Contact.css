@@ -1,0 +1,53 @@
+/* Contact.css */
+.contact-container {
+    color: white;
+    padding: 40px; /* Adjust padding as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically in the container */
+    align-items: center; /* Centers content horizontally in the container */
+    height: 100vh; /* 100% of the viewport height */
+    font-family: 'Arial', sans-serif; /* Choose a font that closely matches your image */
+  }
+  
+  .header {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+  }
+  
+  .intro {
+    margin-bottom: 1em;
+    font-size: 2em; /* Adjust the font size as needed */
+  }
+  
+  .contactInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .phone, .email {
+    margin: 1em 0;
+    font-size: 2em;
+  }
+  
+  .icon {
+    margin-right: 20px;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
