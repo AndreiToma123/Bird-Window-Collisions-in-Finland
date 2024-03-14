@@ -1,6 +1,10 @@
 .App-nav {
   display: flex;
   justify-content: space-evenly;
-  background-color: #ffffff;
+  background-color: #08457D;
   padding: 1rem;
+}
+
+.App-nav a {
+  color: white;
 }
