@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import imageCompression from 'browser-image-compression';
 function UploadForm() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [description, setDescription] = useState('');
@@ -50,34 +50,52 @@ function UploadForm() {
     setSelectedFiles([]);
     setDescription('');
     setUploadStatus('Upload successful');
-  };
+  };  
+  // 压缩图片并返回Blob对象
+  async function compressFile(file) {
+    const options = {
+      maxSizeMB: 10, // 最大文件大小
+      useWebWorker: true,
+    };
+
+    try {
+      const compressedFile = await imageCompression(file, options);
+      return compressedFile;
+    } catch (error) {
+      console.error(error);
+      throw error; // 抛出错误让外部处理
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
-    for (let i = 0; i < selectedFiles.length; i++) {
-      formData.append('images', selectedFiles[i]);
-    }
-    formData.append('description', description);
-    formData.append('location', JSON.stringify(location.coordinates));
-
     try {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const compressedFile = await compressFile(selectedFiles[i]);
+        formData.append('images', compressedFile, compressedFile.name); // 使用压缩后的图片
+      }
+      formData.append('description', description);
+      formData.append('location', JSON.stringify(location.coordinates));
+
       const response = await fetch('http://localhost:4000/upload', {
         method: 'POST',
         body: formData,
       });
+
       if (response.ok) {
         resetForm();
       } else {
         setUploadStatus('Upload failed');
       }
     } catch (error) {
-      console.error('Error during upload:', error);
-      setUploadStatus('Error during upload: ' + error.message);
+      console.error('Error during compression or upload:', error);
+      setUploadStatus('Error during compression or upload: ' + error.message);
     }
   };
 
+  
   return (
     <div style={{ margin: '0 auto', width: '100%', maxWidth: '500px' }}>
       <form onSubmit={handleSubmit}>

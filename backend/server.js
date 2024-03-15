@@ -17,7 +17,11 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 } // 设置最大文件大小为 10MB
+});
 
 // 使用bodyParser处理JSON数据和表单数据
 app.use(bodyParser.json());
@@ -44,26 +48,31 @@ const DataModel = mongoose.model('Data', DataSchema);
 
 // 定义上传数据的路由
 app.post('/upload', upload.array('images', 3), async (req, res) => {
+  const { description, location } = req.body;
+  const images = req.files.map(file => file.path); // 获取上传的文件路径
+
+  const newData = new DataModel({
+    description,
+    location: JSON.parse(location), // 确保前端发送的location是字符串化的JSON
+    images,
+    confirmed: false, // 初始状态为未确认
+  });
+
   try {
-    const { description, location } = req.body;
-    console.log(req.files);
-
-    const images = req.files.map(file => file.path); // 获取上传的文件路径
-
-    const newData = new DataModel({
-      description,
-      location: JSON.parse(location), // 确保前端发送的location是字符串化的JSON
-      images,
-      confirmed: false, // 初始状态为未确认
-    });
-
     await newData.save(); // 保存到数据库
     res.status(201).send('Data saved to MongoDB');
   } catch (error) {
     console.error(error);
     res.status(500).send('Error saving data');
   }
+}, (error, req, res, next) => { // 错误处理函数
+  if (error instanceof multer.MulterError && error.code === 'LIMIT_FILE_SIZE') {
+    res.status(400).send('File size is too large. Maximum size is 10MB.');
+  } else {
+    res.status(500).send('Unexpected error occurred');
+  }
 });
+
 
 app.get('/api/data/unconfirmed', async (req, res) => {
   try {
