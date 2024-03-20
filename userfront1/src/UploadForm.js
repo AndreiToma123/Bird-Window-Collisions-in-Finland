@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import imageCompression from 'browser-image-compression';
+// import imageCompression from 'browser-image-compression';
 function UploadForm() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [description, setDescription] = useState('');
@@ -58,13 +58,13 @@ function UploadForm() {
       useWebWorker: true,
     };
 
-    try {
-      const compressedFile = await imageCompression(file, options);
-      return compressedFile;
-    } catch (error) {
-      console.error(error);
-      throw error; // 抛出错误让外部处理
-    }
+    // try {
+    //   const compressedFile = await imageCompression(file, options);
+    //   return compressedFile;
+    // } catch (error) {
+    //   console.error(error);
+    //   throw error; // 抛出错误让外部处理
+    // }
   }
 
   const handleSubmit = async (event) => {

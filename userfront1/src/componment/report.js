@@ -153,7 +153,7 @@ function UploadForm() {
           {selectedLocation && (
           <p>Selected Coordinates: Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}</p>
           )}
-          <button onClick={handleSaveLocation} className="save-location-button">Save Location</button>
+          <button type='button' onClick={handleSaveLocation} className="save-location-button">Save Location</button>
         </div>
 
         <div>
@@ -180,14 +180,18 @@ function UploadForm() {
             <LocationPicker />
             <MapUpdater center={[location.coordinates.lat, location.coordinates.lng]} />
           </MapContainer>
-        </div>
 
-        <div className="submit-button-container">
-          <button type="submit">Submit</button>
-        </div>
+          <div className="submit-button-container">
+            <button onClick={handleSubmit} className='submit-button-container button'>Submit</button>
+          </div>
+          <div className="cancel-button-container">
+            <button type="cancel">Cancel</button>
+          </div> 
+      </div>
+
     </div>
   );
   
 }
 
-export default UploadForm;           
+export default UploadForm;
