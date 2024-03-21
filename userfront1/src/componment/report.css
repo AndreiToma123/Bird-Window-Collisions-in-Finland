@@ -15,29 +15,35 @@ body, html {
     overflow-y: auto;
 }
 
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: calc(100vw - 8rem);
+}
+
 .form-container {
-    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
-    margin: 2rem auto;
-    max-width: calc(100vw - 8rem);
-    height: calc(100vh - 10rem);
-    padding: 0 2rem;
+    width: 100%;
     gap: 2rem;
-    margin-top: 1.5rem; 
-    min-height: calc(100vh - 10rem);
-    padding-bottom: 3rem;
+    margin-bottom: -0.5rem;
 }
 
-.submit-button-container {
-    position: absolute; 
-    right: 0rem;
-    bottom: -0.45rem;
-    margin-bottom: -1.8rem;
-    z-index: 10;
+.buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap; 
 }
+
+.submit-button-container,
+.cancel-button-container {
+    margin: 0;
+}
+
 
 .submit-button-container button {
     padding: 0.5rem 1rem; 
@@ -46,15 +52,6 @@ body, html {
     height: 40px; 
     background-color: #FFEB3B; 
     color: black;
-}
-
-.cancel-button-container {
-    position: absolute; 
-    left: 0rem;
-    bottom: -3rem;
-    margin-bottom: -1.8rem;
-    color: #ffffff;
-    z-index: 10;
 }
 
 .cancel-button-container button {
@@ -189,29 +186,27 @@ h4 + p {
     margin-top: -1rem;
 }
 
+
 @media (max-width: 768px) {
-    .form-container {
-        padding: 5%;
-        flex-direction: column;
-        align-items: center;
-        min-height: auto;
-    }
 
+    .form-container,
     .left-container,
-    .map-container {
+    .map-container,
+    .buttons-container {
+        flex-direction: column;
         width: 100%;
-        max-width: none;
-        padding: 0 1rem; 
-    }
-
-    .left-container {
-        order: 1;
-        padding-bottom: 1rem; 
+        align-items: center;
+        padding: 5%;
     }
 
     .map-container {
         height: 250px;
         order: 2;
+    }
+
+    .buttons-container {
+        order: 3;
+        justify-content: center;
     }
 
     .image-upload {
@@ -222,13 +217,30 @@ h4 + p {
         max-height: 90px;
     }
 
+    .left-container form {
+        margin-bottom: -2rem;
+    }
+
     .cancel-button-container {
         position: static;
         width: 100%;
         text-align: center;
-        order: 3;
+        /* order: 3; */
         margin-top: 1rem;
         margin-bottom: 0;
+    }
+
+    .submit-button-container {
+        position: static;
+        width: 100%;
+        text-align: center;
+        margin-top: 0rem;
+        margin-bottom: 0;
+    }
+
+    .submit-button-container button {
+        width: auto; 
+        margin: 0 auto;
     }
 
     .cancel-button-container button {
@@ -236,18 +248,8 @@ h4 + p {
         margin: 0 auto;
     }
 
-    .submit-button-container {
-        position: static;
-        width: 100%;
-        text-align: center;
-        order: 3;
+    .description-container {
         margin-top: 1rem;
-        margin-bottom: 0;
-    }
-
-    .submit-button-container button {
-        width: auto; 
-        margin: 0 auto;
     }
 
     .description-textarea {

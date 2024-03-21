@@ -106,90 +106,95 @@ function UploadForm() {
   
 
   return (
-    <div className="form-container">
-      <div className="left-container">
-      <form onSubmit={handleSubmit}>
-        <div className="image-upload-container">
-        {['head', 'body', 'tail'].map((part) => (
-          <div className="image-upload" key={part}>
-            <input
-              id={`image-upload-${part}`}
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageChange(part, e)}
-              className="image-upload-input"
-            />
-            <label htmlFor={`image-upload-${part}`} className="image-upload-label">
-              <div className="image-upload-plus">+</div>
-            </label>
-            {part === 'head' && headImage && (
-              <img src={headImage} alt="Head Preview" className="image-preview" />
-            )}
-            {part === 'body' && bodyImage && (
-              <img src={bodyImage} alt="Body Preview" className="image-preview" />
-            )}
-            {part === 'tail' && tailImage && (
-              <img src={tailImage} alt="Tail Preview" className="image-preview" />
-            )}
-            <span className="image-upload-text">
-              {part.charAt(0).toUpperCase() + part.slice(1)}
-            </span>
+    <div className='page-container'>
+      <div className="form-container">
+        <div className="left-container">
+        <form onSubmit={handleSubmit}>
+          <div className="image-upload-container">
+          {['head', 'body', 'tail'].map((part) => (
+            <div className="image-upload" key={part}>
+              <input
+                id={`image-upload-${part}`}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageChange(part, e)}
+                className="image-upload-input"
+              />
+              <label htmlFor={`image-upload-${part}`} className="image-upload-label">
+                <div className="image-upload-plus">+</div>
+              </label>
+              {part === 'head' && headImage && (
+                <img src={headImage} alt="Head Preview" className="image-preview" />
+              )}
+              {part === 'body' && bodyImage && (
+                <img src={bodyImage} alt="Body Preview" className="image-preview" />
+              )}
+              {part === 'tail' && tailImage && (
+                <img src={tailImage} alt="Tail Preview" className="image-preview" />
+              )}
+              <span className="image-upload-text">
+                {part.charAt(0).toUpperCase() + part.slice(1)}
+              </span>
+            </div>
+          ))}
+
           </div>
-        ))}
-
-        </div>
-  
-        <div className="description-container">
-          <h4>Description</h4>
-          <textarea
-            placeholder="Enter your description here"
-            value={description}
-            onChange={handleDescriptionChange}
-            className="description-textarea"
-          />
-        </div>
-
-        <div>
-          {selectedLocation && (
-          <p>Selected Coordinates: Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}</p>
-          )}
-          <button type='button' onClick={handleSaveLocation} className="save-location-button">Save Location</button>
-        </div>
-
-        <div>
-          <h4>Location data:</h4>
-          {location.loaded ? (
-            location.error ? <p>{location.error}</p> : <p>Latitude: {location.coordinates.lat}, Longitude: {location.coordinates.lng}</p>
-          ) : (
-            <p>Loading location...</p>
-          )}
-        </div>
-
-        </form>
-      </div>
-
-      <div className="map-container">
-          <MapContainer center={[location.coordinates.lat, location.coordinates.lng]} zoom={13} style={{ height: '100%', width: '100%' }}>
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    
+          <div className="description-container">
+            <h4>Description</h4>
+            <textarea
+              placeholder="Enter your description here"
+              value={description}
+              onChange={handleDescriptionChange}
+              className="description-textarea"
             />
+          </div>
+
+          <div>
             {selectedLocation && (
-              <Marker position={[selectedLocation.lat, selectedLocation.lng]} icon={customIcon}></Marker>
+            <p>Selected Coordinates: Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}</p>
             )}
-            <LocationPicker />
-            <MapUpdater center={[location.coordinates.lat, location.coordinates.lng]} />
-          </MapContainer>
-
-          <div className="submit-button-container">
-            <button onClick={handleSubmit} className='submit-button-container button'>Submit</button>
+            <button type='button' onClick={handleSaveLocation} className="save-location-button">Save Location</button>
           </div>
-          <div className="cancel-button-container">
-            <button type="cancel">Cancel</button>
-          </div> 
+
+          <div>
+            <h4>Location data:</h4>
+            {location.loaded ? (
+              location.error ? <p>{location.error}</p> : <p>Latitude: {location.coordinates.lat}, Longitude: {location.coordinates.lng}</p>
+            ) : (
+              <p>Loading location...</p>
+            )}
+          </div>
+
+          </form>
+        </div>
+
+        <div className="map-container">
+            <MapContainer center={[location.coordinates.lat, location.coordinates.lng]} zoom={13} style={{ height: '100%', width: '100%' }}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+              {selectedLocation && (
+                <Marker position={[selectedLocation.lat, selectedLocation.lng]} icon={customIcon}></Marker>
+              )}
+              <LocationPicker />
+              <MapUpdater center={[location.coordinates.lat, location.coordinates.lng]} />
+            </MapContainer>
+        </div>
+
       </div>
 
+      <div className='buttons-container'>
+        <div className="cancel-button-container">
+          <button type="cancel">Cancel</button>
+        </div> 
+        <div className="submit-button-container">
+          <button onClick={handleSubmit} className='submit-button-container button'>Submit</button>
+        </div>
+      </div>
     </div>
+    
   );
   
 }
