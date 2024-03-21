@@ -10,7 +10,12 @@ function UploadForm() {
   const [headImage, setHeadImage] = useState(null);
   const [bodyImage, setBodyImage] = useState(null);
   const [tailImage, setTailImage] = useState(null);
-  const [description, setDescription] = useState(''); 
+  const [description, setDescription] = useState('');
+  const placeholderText = `Please provide a detailed description of the bird collision event, e.g.:
+  - Weather conditions
+  - Distance from the window
+  - Lethal or non-lethal collision`;
+
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [location, setLocation] = useState({
@@ -45,7 +50,22 @@ function UploadForm() {
     return null;
   };
   
-  
+  const handleFocus = (event) => {
+    if (event.target.value === placeholderText) {
+      setDescription('');
+    }
+  };
+
+  const handleBlur = (event) => {
+    if (event.target.value === '') {
+      setDescription(placeholderText);
+    }
+  };
+
+  useEffect(() => {
+    setDescription(placeholderText);
+  }, []);
+
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -143,9 +163,10 @@ function UploadForm() {
           <div className="description-container">
             <h4>Description</h4>
             <textarea
-              placeholder="Enter your description here"
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               value={description}
-              onChange={handleDescriptionChange}
+              onChange={(e) => setDescription(e.target.value)}
               className="description-textarea"
             />
           </div>

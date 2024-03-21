@@ -168,6 +168,7 @@ button {
     border-radius: 5px;
     border: 1px solid #ddd;
     margin-top: -0.8rem;
+    color: #707070;
 }
 
 .save-location-button {
