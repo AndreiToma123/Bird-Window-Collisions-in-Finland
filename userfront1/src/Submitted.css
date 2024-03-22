@@ -34,11 +34,11 @@
   }
   
   button:hover {
-    background-color: #003399; 
+    background-color: #BBBBBB; 
   }
   
   button:nth-child(2) {
-    background-color: #BBBBBB; 
+    background-color: white; 
   }
   
   
