@@ -26,6 +26,15 @@ function UploadForm() {
     error: null
   });
 
+  const [timestamp, setTimestamp] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+    setTimestamp(localDateTime);
+  }, []);
+  
+
   const customIcon = L.icon({
     iconUrl: customIconUrl,
     iconSize: [38, 95], 
@@ -211,6 +220,18 @@ function UploadForm() {
             ) : (
               <p>Loading location...</p>
             )}
+
+            <div class="timestamp-container">
+              <label htmlFor="timestamp">Timestamp:</label>
+              <input
+                type="datetime-local"
+                id="timestamp"
+                name="timestamp"
+                value={timestamp}
+                onChange={(e) => setTimestamp(e.target.value)}
+                className="timestamp-input"
+              />
+            </div>
           </div>
 
           </form>

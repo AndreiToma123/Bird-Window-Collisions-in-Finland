@@ -188,6 +188,30 @@ h4 + p {
 }
 
 
+.timestamp-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+  
+.timestamp-container label {
+    font-weight: bold;
+    margin-right: 1rem;
+    color: #ffffff;
+    white-space: nowrap;
+}
+  
+.timestamp-input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #000000;
+    background-color: #ffffff;
+}
+  
+
+
 @media (max-width: 768px) {
 
     .form-container,
@@ -230,7 +254,7 @@ h4 + p {
     }
 
     .left-container form {
-        margin-bottom: -2rem;
+        margin-bottom: -1rem;
     }
 
     .submit-button-container,
@@ -266,5 +290,14 @@ h4 + p {
 
     .description-textarea {
         height: 80px; 
+    }
+
+    .timestamp-container {
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+    
+    .timestamp-container label {
+        margin-bottom: 1rem;
     }
 }
