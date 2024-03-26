@@ -5,17 +5,19 @@ import customIconUrl from '../Picture/Map_Location_Symbol.png';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
 import './report.css'; 
+import Modal from './Modal';
 
 function UploadForm() {
   const [headImage, setHeadImage] = useState(null);
   const [bodyImage, setBodyImage] = useState(null);
   const [tailImage, setTailImage] = useState(null);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(''); 
   const placeholderText = `Please provide a detailed description of the bird collision event, e.g.:
   - Weather conditions
   - Distance from the window
   - Lethal or non-lethal collision`;
-
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [activePart, setActivePart] = useState('');
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [location, setLocation] = useState({
@@ -50,6 +52,15 @@ function UploadForm() {
     return null;
   };
   
+  const openModal = (part) => {
+    setActivePart(part);
+    setModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const handleFocus = (event) => {
     if (event.target.value === placeholderText) {
       setDescription('');
@@ -65,7 +76,7 @@ function UploadForm() {
   useEffect(() => {
     setDescription(placeholderText);
   }, []);
-
+  
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -109,14 +120,29 @@ function UploadForm() {
     }
   };
 
+  const handleGallery = () => { 
+    const fileInput = document.getElementById(`image-upload-${activePart}`);
+    if (fileInput) {
+      fileInput.click(); 
+    }
+    closeModal();
+  };
+  
+  
+  
+  const handleCamera = () => {
+    closeModal();
+    // This would be the place to implement camera functionality
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     navigate('/submitted');
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
+  // const handleDescriptionChange = (event) => {
+  //   setDescription(event.target.value);
+  // };
 
   const handleSaveLocation = () => {
     if (selectedLocation) {
@@ -132,7 +158,7 @@ function UploadForm() {
         <form onSubmit={handleSubmit}>
           <div className="image-upload-container">
           {['head', 'body', 'tail'].map((part) => (
-            <div className="image-upload" key={part}>
+            <div className="image-upload" key={part} onClick={() => openModal(part)}>
               <input
                 id={`image-upload-${part}`}
                 type="file"
@@ -206,6 +232,10 @@ function UploadForm() {
 
       </div>
 
+    
+      <Modal isOpen={isModalOpen} onClose={closeModal} onGallery={handleGallery} onCamera={handleCamera}>
+        <p>Choose an option for uploading a {activePart} image:</p>
+      </Modal>
       <div className='buttons-container'>
         <div className="cancel-button-container">
           <button type="cancel">Cancel</button>
@@ -220,4 +250,4 @@ function UploadForm() {
   
 }
 
-export default UploadForm;
+export default UploadForm;           
