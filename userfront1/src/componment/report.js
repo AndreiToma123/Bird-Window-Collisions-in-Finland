@@ -6,11 +6,15 @@ import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
 import './report.css'; 
 import Modal from './Modal';
+import imageCompression from 'browser-image-compression';
+
+
 
 function UploadForm() {
-  const [headImage, setHeadImage] = useState(null);
-  const [bodyImage, setBodyImage] = useState(null);
-  const [tailImage, setTailImage] = useState(null);
+  const [headImage, setHeadImage] = useState({ file: null, preview: null });
+const [bodyImage, setBodyImage] = useState({ file: null, preview: null });
+const [tailImage, setTailImage] = useState({ file: null, preview: null });
+
   const [description, setDescription] = useState(''); 
   const placeholderText = `Please provide a detailed description of the bird collision event, e.g.:
   - Weather conditions
@@ -120,14 +124,30 @@ function UploadForm() {
   
 
   const handleImageChange = (imageType, event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageSetter = imageType === 'head' ? setHeadImage
-                          : imageType === 'body' ? setBodyImage
-                          : setTailImage;
-      imageSetter(URL.createObjectURL(file));
+    console.log(event.target.files); // 直接检查这里是否有值
+    if (!event.target.files || event.target.files.length === 0) {
+        console.error('No files selected.');
+        return;
     }
-  };
+    const file = event.target.files[0];
+    const previewUrl = URL.createObjectURL(file); // 创建文件的URL用于预览
+
+    // 根据传入的imageType决定更新哪个状态
+    switch (imageType) {
+        case 'head':
+            setHeadImage({ file: file, preview: previewUrl });
+            break;
+        case 'body':
+            setBodyImage({ file: file, preview: previewUrl });
+            break;
+        case 'tail':
+            setTailImage({ file: file, preview: previewUrl });
+            break;
+        default:
+            console.error('Invalid image type');
+    }
+};
+
 
   const handleGallery = () => { 
     const fileInput = document.getElementById(`image-upload-${activePart}`);
@@ -143,10 +163,59 @@ function UploadForm() {
     closeModal();
     // This would be the place to implement camera functionality
   };
-
-  const handleSubmit = (event) => {
+  async function compressImage(file) {
+    const options = {
+      maxSizeMB: 10, // 设置最大文件大小为1MB
+      maxWidthOrHeight: 1920, // 设置图片的最大宽度或高度
+      useWebWorker: true,
+    };
+  
+    try {
+      return await imageCompression(file, options);
+    } catch (error) {
+      console.error("Error compressing file:", file.name, error);
+      throw error; // 抛出错误以便外部捕获
+    }
+  }
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    navigate('/submitted');
+  
+    const formData = new FormData();
+  
+
+    const imageFiles = [headImage, bodyImage, tailImage];
+    console.log(imageFiles)
+
+    if (headImage && headImage.file) formData.append('headImage', headImage.file);
+  if (bodyImage && bodyImage.file) formData.append('bodyImage', bodyImage.file);
+  if (tailImage && tailImage.file) formData.append('tailImage', tailImage.file);
+
+    
+    
+    
+
+    formData.append('description', description);
+    formData.append('timestamp', timestamp);
+    formData.append('location', JSON.stringify(location));
+    console.log()
+      try {
+      const response = await fetch('http://localhost:4000/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        // 处理成功逻辑
+        navigate('/submitted');
+      } else {
+        // 处理错误逻辑
+        alert('Submission failed. Please try again.');
+      }
+    } catch (error) {
+      // 处理网络请求中的错误
+      console.error('Error during submission:', error);
+      alert('Submission failed. Please check your internet connection and try again.');
+    }
   };
 
   // const handleDescriptionChange = (event) => {
