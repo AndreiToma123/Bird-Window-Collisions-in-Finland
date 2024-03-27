@@ -48,7 +48,8 @@ function App() {
           <Link to="/">🏠Home</Link>
           <Link to="/about">👁About us</Link>
           <Link to="/contact">👤Contact</Link>
-          <Link to="/report">🕊Report</Link>
+          <Link to="/report">🕊Feedback</Link>
+          <Link to="/login">Login</Link>
           <Button onClick={toggleVisibility} />
           <Dropdown isVisible={isVisible} />
         </nav>

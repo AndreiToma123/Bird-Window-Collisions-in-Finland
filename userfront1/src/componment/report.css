@@ -301,3 +301,54 @@ h4 + p {
         margin-bottom: 1rem;
     }
 }
+
+/* bird-search-container 样式 */
+.bird-search-container {
+    margin: 20px 0;
+    margin-bottom: 50px; /* 增加了下边距 */
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bird-search-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .bird-search-dropdown {
+    margin-top: 8px;
+    list-style: none;
+    padding-left: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bird-search-dropdown li {
+    padding: 8px 10px;
+    cursor: pointer;
+    color: black; /* 设置字体颜色为黑色 */
+  }
+  
+  
+  .bird-search-dropdown li:hover {
+    background-color: #e9e9e9;
+  }
+  
+  /* 在小屏幕设备上的调整 */
+  @media (max-width: 768px) {
+    .bird-search-container {
+      margin: 10px 0;
+      margin-bottom: 15px; /* 在小屏幕上减小间距 */
+    }
+  }
+  
+  
