@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Home from './Home';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import UploadForm from './UploadForm';
 import About from './About';
@@ -54,11 +55,13 @@ function App() {
           <Dropdown isVisible={isVisible} />
         </nav>
         <Routes>
+          <Route path="/Home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/report" element={<UploadForm />} />
           <Route path="/submitted" element={<Submitted />} />
-          <Route path="/" element={<Report />} />
+          <Route path="/a" element={<Report />} />
+          <Route path="/" element={<Home />} />
         </Routes>
 
       </div>

@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the start of the container */
+    align-items: center; /* This centers the children elements, you might want to remove this if everything should be aligned to the left */
+    background-color: #0047AB;
+    color: white;
+    height: 100vh;
+    margin: 0;
+    padding-top: 30px; /* Adjust this value to set how far from the top the content should start */
+  }
+  
+  .title-container {
+    font-size: 24px; /* Make the font size smaller as desired */
+    align-self: flex-start; /* Aligns this item to the start (left) of the container */
+    margin-left: 30px; /* Adjust this value to set how far from the left side the title should start */
+    margin-bottom: 100px; /* Adjust this value to create a bigger gap between the title and subtitle */
+  }
+  
+  .subtitle-container {
+    font-size: 50px;
+    margin-bottom: 30px; /* Adjust this value to set the space between the subtitle and button */
+    text-align: center; /* Center the subtitle text */
+  }
+  
+  .report-button {
+    background-color: #FF4500; /* Start with a solid color */
+    background-image: linear-gradient(145deg, #ff6f00, #ff4500); /* Add a gradient for depth */
+    color: white;
+    border: 2px solid #ffffff; /* Add a white border for contrast */
+    width: 200px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height to make the shape a circle */
+    font-size: 18px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the font bold */
+    cursor: pointer;
+    border-radius: 50%; /* This makes the element a circle */
+    outline: none;
+    display: flex;
+    align-items: center; /* This centers the text vertically */
+    justify-content: center; /* This centers the text horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    text-align: center; /* Ensures text is centered if it wraps */
+    overflow: hidden; /* Prevents any child elements from overflowing the circular boundary */
+  }
+  
+  .report-button:hover {
+    background-image: linear-gradient(145deg, #ff4500, #ff6f00); /* Lighten the gradient on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increase the shadow size on hover */
+    transform: scale(1.05); /* Slightly increase the button size on hover */
+  }
+  
