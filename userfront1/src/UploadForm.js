@@ -51,20 +51,13 @@ function UploadForm() {
     setDescription('');
     setUploadStatus('Upload successful');
   };  
-  // 压缩图片并返回Blob对象
+
   async function compressFile(file) {
     const options = {
       maxSizeMB: 10, // 最大文件大小
       useWebWorker: true,
     };
 
-    // try {
-    //   const compressedFile = await imageCompression(file, options);
-    //   return compressedFile;
-    // } catch (error) {
-    //   console.error(error);
-    //   throw error; // 抛出错误让外部处理
-    // }
   }
 
   const handleSubmit = async (event) => {

@@ -40,37 +40,64 @@ mongoose.connect('mongodb://localhost:27017/yourDatabaseName', {
 // 定义一个简单的数据模型
 const DataSchema = new mongoose.Schema({
   description: String,
-  location: { lat: Number, lng: Number },
-  images: [String], // 存储上传文件的路径
+  time: String,
+  location: {
+    lat: Number,
+    lng: Number
+  },
+  images: [String],
   confirmed: { type: Boolean, default: false },
 });
+
+
 const DataModel = mongoose.model('Data', DataSchema);
 
-// 定义上传数据的路由
-app.post('/upload', upload.array('images', 3), async (req, res) => {
-  const { description, location } = req.body;
-  const images = req.files.map(file => file.path); // 获取上传的文件路径
+
+app.post('/upload', upload.fields([
+  { name: 'headImage', maxCount: 1 },
+  { name: 'bodyImage', maxCount: 1 },
+  { name: 'tailImage', maxCount: 1 }
+]),  async (req, res) => {
+  const { description, timestamp } = req.body;
+  console.log(req.body)
+  let location;
+  try {
+    location = JSON.parse(req.body.location);
+  } catch (e) {
+    return res.status(400).send('Invalid location format');
+  }
+
+  const images = [];
+  if(req.files['headImage']) images.push(req.files['headImage'][0].path);
+  if(req.files['bodyImage']) images.push(req.files['bodyImage'][0].path);
+  if(req.files['tailImage']) images.push(req.files['tailImage'][0].path);
+
+  const parsedLocation = JSON.parse(req.body.location);
+  const locationCoordinates = parsedLocation.coordinates; // 直接使用 coordinates 对象
 
   const newData = new DataModel({
     description,
-    location: JSON.parse(location), // 确保前端发送的location是字符串化的JSON
+    time: timestamp,
+    location: locationCoordinates, // 使用解构的方式直接传递 lat 和 lng
     images,
-    confirmed: false, // 初始状态为未确认
+    confirmed: false,
   });
 
   try {
-    await newData.save(); // 保存到数据库
+    await newData.save();
     res.status(201).send('Data saved to MongoDB');
   } catch (error) {
     console.error(error);
     res.status(500).send('Error saving data');
   }
-}, (error, req, res, next) => { // 错误处理函数
+}, (error, req, res, next) => { // Multer 错误处理函数
+  console.log(error)
   if (error instanceof multer.MulterError && error.code === 'LIMIT_FILE_SIZE') {
-    res.status(400).send('File size is too large. Maximum size is 10MB.');
-  } else {
-    res.status(500).send('Unexpected error occurred');
+    return res.status(400).send('File size is too large. Maximum size is 10MB.');
+  } else if (error) {
+    return res.status(500).send('Unexpected error occurred');
   }
+  next();
 });
 
 
