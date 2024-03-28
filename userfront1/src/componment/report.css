@@ -105,14 +105,29 @@ button {
     align-items: center;
     justify-content: center;
     position: relative;
-    border: 2px dashed #ffffff;
+    border: none;
     border-radius: 10px;
     padding: 1rem;
     width: 90px;
     height: 90px;
     background-color: transparent;
     margin-bottom: 20px;
-  }
+}
+
+/* #image-upload-head {
+    background-image: url('../Picture/head.jpg');
+    background-size: cover;
+}
+  
+  #image-upload-body {
+    background-image: url('../Picture/body.jpg');
+    background-size: cover;
+}
+  
+  #image-upload-tail {
+    background-image: url('../Picture/tail.jpg');
+    background-size: cover;
+} */
 
   
 .image-upload-label {
@@ -138,11 +153,6 @@ button {
     transform: translate(-50%, -50%);
   }
   
-.image-upload-plus {
-    font-size: 24px;
-    color: #ffffff;
-}
-  
 .image-upload-input {
     display: none;
 }
@@ -153,7 +163,7 @@ button {
     left: 50%;
     transform: translateX(-50%);
     color: white;
-  }
+}
 
 
 .description-container {

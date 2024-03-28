@@ -175,9 +175,9 @@ function UploadForm() {
                 onChange={(e) => handleImageChange(part, e)}
                 className="image-upload-input"
               />
-              <label htmlFor={`image-upload-${part}`} className="image-upload-label">
+              {/* <label htmlFor={`image-upload-${part}`} className="image-upload-label">
                 <div className="image-upload-plus">+</div>
-              </label>
+              </label> */}
               {part === 'head' && headImage && (
                 <img src={headImage} alt="Head Preview" className="image-preview" />
               )}
