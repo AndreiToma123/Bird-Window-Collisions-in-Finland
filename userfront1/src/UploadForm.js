@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import imageCompression from 'browser-image-compression';
+import imageCompression from 'browser-image-compression';
 function UploadForm() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [description, setDescription] = useState('');

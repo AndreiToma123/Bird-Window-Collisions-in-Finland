@@ -114,20 +114,21 @@ button {
     margin-bottom: 20px;
 }
 
-/* #image-upload-head {
-    background-image: url('../Picture/head.jpg');
-    background-size: cover;
+
+.image-upload-text {
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-  
-  #image-upload-body {
-    background-image: url('../Picture/body.jpg');
-    background-size: cover;
+
+.image-upload-camera-icon {
+    margin-left: 7px;
+    width: 21px; 
+    height: 21px;
+    cursor: pointer;
 }
-  
-  #image-upload-tail {
-    background-image: url('../Picture/tail.jpg');
-    background-size: cover;
-} */
 
   
 .image-upload-label {
